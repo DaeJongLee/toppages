@@ -1,0 +1,57 @@
+// ✅ scan.html (바코드 인식 → JSON 기반 product.html로 이동)
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Scan Product Barcode</title>
+  <script src="https://unpkg.com/html5-qrcode" type="text/javascript"></script>
+  <style>
+    body {
+      font-family: sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 1rem;
+      background-color: #f0f0f0;
+    }
+    h2 {
+      margin-bottom: 1rem;
+    }
+    #reader {
+      width: 300px;
+      margin-bottom: 1rem;
+    }
+    .hint {
+      font-size: 0.9rem;
+      color: #555;
+    }
+  </style>
+</head>
+<body>
+  <h2>📷 바코드를 스캔하세요</h2>
+  <div id="reader"></div>
+  <div class="hint">제품 뒷면의 바코드를 카메라에 비춰주세요</div>
+
+  <script>
+    function onScanSuccess(decodedText, decodedResult) {
+      console.log("Scanned: " + decodedText);
+      if (/^\d{13}$/.test(decodedText)) {
+        window.location.href = `/product.html?code=${decodedText}`;
+      } else {
+        alert("잘못된 바코드입니다. 다시 시도해주세요.");
+      }
+    }
+
+    const html5QrCode = new Html5Qrcode("reader");
+    html5QrCode.start(
+      { facingMode: "environment" },
+      { fps: 10, qrbox: 250 },
+      onScanSuccess
+    ).catch(err => {
+      console.error("카메라 접근 오류:", err);
+    });
+  </script>
+</body>
+</html>

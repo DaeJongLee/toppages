@@ -1,0 +1,19 @@
+{
+  "8800308830864": {
+    "name": {
+      "ko": "리쥬올 연질캡슐",
+      "en": "Rejuol Soft Capsules",
+      "ja": "リジュオール ソフトカプセル",
+      "zh": "Rejuol 软胶囊",
+      "ru": "Rejuol мягкие капсулы"
+    },
+    "description": {
+      "ko": "간 기능 개선과 피로 회복에 도움을 주는 건강기능식품입니다.",
+      "en": "A health supplement that helps improve liver function and reduce fatigue.",
+      "ja": "肝機能の改善と疲労回復をサポートする健康補助食品です。",
+      "zh": "有助于改善肝功能和缓解疲劳的保健食品。",
+      "ru": "Биодобавка, способствующая улучшению функции печени и снижению усталости."
+    },
+    "image": "assets/images/rejuol.jpg"
+  }
+}

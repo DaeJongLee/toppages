@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Product Info</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      padding: 1rem;
+      text-align: center;
+      background: #f5f5f5;
+    }
+    h1 {
+      color: #333;
+    }
+    img {
+      max-width: 200px;
+      margin: 1rem auto;
+      display: block;
+    }
+    .description {
+      font-size: 1rem;
+      margin-top: 1rem;
+    }
+    .back-link {
+      margin-top: 2rem;
+      display: inline-block;
+      padding: 0.5rem 1.5rem;
+      background: #3399cc;
+      color: white;
+      text-decoration: none;
+      border-radius: 8px;
+    }
+  </style>
+</head>
+<body>
+  <h1 id="product-name">Loading...</h1>
+  <img id="product-image" src="" alt="Product image" />
+  <p class="description" id="product-description"></p>
+  <a href="scan.html" class="back-link">🔁 다시 스캔하기</a>
+
+  <script>
+    const lang = localStorage.getItem('preferredLang') || navigator.language.slice(0, 2) || "en";
+    const urlParams = new URLSearchParams(window.location.search);
+    const code = urlParams.get('code');
+
+    if (!code) {
+      document.body.innerHTML = "<p>❌ 바코드 정보가 없습니다.</p>";
+    } else {
+      fetch('products.json')
+        .then(res => res.json())
+        .then(data => {
+          const product = data[code];
+          if (!product) {
+            document.body.innerHTML = "<p>😥 제품 정보를 찾을 수 없습니다.</p>";
+          } else {
+            document.getElementById('product-name').textContent = product.name[lang] || product.name['en'];
+            document.getElementById('product-description').textContent = product.description[lang] || product.description['en'];
+            document.getElementById('product-image').src = product.image;
+          }
+        })
+        .catch(err => {
+          document.body.innerHTML = "<p>⚠️ 제품 정보를 불러오지 못했습니다.</p>";
+          console.error(err);
+        });
+    }
+  </script>
+</body>
+</html>
+    <h1>Pharmacy QR Code Scanner</h1>
+  </header>
+  <div class="language-select">
+    <button onclick="setLanguage('en')">English</button>
+    <button onclick="setLanguage('ko')">한국어</button>
+    <button onclick="setLanguage('zh')">中文</button>
+  </div>
+  <div class="scan-link">
+    <a href="scan.html">📷 바코드 스캔하기</a>
+  </div>
+  <footer>
+    <p>&copy; 2023 Pharmacy QR. All rights reserved.</p>
+  </footer>
+
+  <script>
+    function setLanguage(lang) {
+      localStorage.setItem('preferredLang', lang);
+      alert(`언어가 ${lang}로 설정되었습니다.`);
+    }
+  </script>
+      window.location.href = "scan.html";
+    }
+  </script>
+  </body>
+</html>
+    window.location.reload();                                                   
